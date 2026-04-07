@@ -565,6 +565,8 @@ async def broadcast_to_clients(bot: Bot, text: str) -> None:
 
 @router.message()
 async def fallback(message: Message) -> None:
+    if message.chat.type != "private":
+        return
     await message.answer(
         "❓ Тушунарсиз буйруқ. Илтимос, менюдан фойдаланинг.",
         reply_markup=main_menu_kb(),
