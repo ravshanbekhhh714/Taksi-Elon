@@ -249,6 +249,8 @@ async def get_all_clients(db_pool: asyncpg.Pool) -> list[asyncpg.Record]:
 # ─── Router / Handlers ──────────────────────────────────────────────────────
 
 router = Router()
+# Ensure all message handlers only work in private chat (ignore group messages)
+router.message.filter(F.chat.type == "private")
 
 
 # ── /start ───────────────────────────────────────────────────────────────────
